@@ -1,6 +1,6 @@
 import React from 'react';
 import { Box, Collapsible } from 'grommet';
-import SidebarContent from '../sidebars/SidebarContent';
+import SidebarContent from './SidebarContent';
 
 const CollapsibleSidebar = props => {
   const { showSidebar } = props;

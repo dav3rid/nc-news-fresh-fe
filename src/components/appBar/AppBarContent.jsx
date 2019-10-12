@@ -6,9 +6,6 @@ const AppBarContent = props => {
   const { showSidebar, toggleSidebar } = props;
   return (
     <>
-      <Heading level='3' margin='none'>
-        NC News
-      </Heading>
       <Button
         icon={
           !showSidebar ? (
@@ -18,6 +15,9 @@ const AppBarContent = props => {
           )
         }
       />
+      <Heading level='3' margin='none'>
+        NC News
+      </Heading>
     </>
   );
 };

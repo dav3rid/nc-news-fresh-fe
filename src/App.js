@@ -4,8 +4,8 @@ import { theme } from './styles/theme';
 import AppBar from './components/appBar/AppBar';
 import AppBarContent from './components/appBar/AppBarContent';
 import AppBody from './components/AppBody';
-import CollapsibleSidebar from './components/sidebars/CollapsibleSidebar';
-import LayeredSidebar from './components/sidebars/LayeredSidebar';
+import CollapsibleSidebar from './components/sidebar/CollapsibleSidebar';
+import LayeredSidebar from './components/sidebar/LayeredSidebar';
 
 class App extends Component {
   state = {
@@ -25,12 +25,12 @@ class App extends Component {
                 />
               </AppBar>
               <Box direction='row' flex overflow={{ horizontal: 'hidden' }}>
-                <AppBody />
                 {!showSidebar || size !== 'small' ? (
                   <CollapsibleSidebar showSidebar={showSidebar} />
                 ) : (
                   <LayeredSidebar hideSidebar={this.hideSidebar} />
                 )}
+                <AppBody />
               </Box>
             </Box>
           )}

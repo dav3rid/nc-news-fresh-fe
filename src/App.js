@@ -1,41 +1,11 @@
 import React, { Component } from 'react';
-import {
-  Box,
-  Button,
-  Collapsible,
-  Heading,
-  Grommet,
-  Layer,
-  ResponsiveContext
-} from 'grommet';
-import { Notification, FormClose } from 'grommet-icons';
-
-const theme = {
-  global: {
-    colors: {
-      brand: '#FF0000'
-    },
-    font: {
-      family: 'Roboto',
-      size: '18px',
-      height: '20px'
-    }
-  }
-};
-
-const AppBar = props => (
-  <Box
-    tag='header'
-    direction='row'
-    align='center'
-    justify='between'
-    background='brand'
-    pad={{ left: 'medium', right: 'small', vertical: 'small' }}
-    elevation='medium'
-    style={{ zIndex: '1' }}
-    {...props}
-  />
-);
+import { Box, Grommet, ResponsiveContext } from 'grommet';
+import { theme } from './styles/theme';
+import AppBar from './components/appBar/AppBar';
+import AppBarContent from './components/appBar/AppBarContent';
+import AppBody from './components/AppBody';
+import CollapsibleSidebar from './components/sidebars/CollapsibleSidebar';
+import LayeredSidebar from './components/sidebars/LayeredSidebar';
 
 class App extends Component {
   state = {
@@ -49,61 +19,17 @@ class App extends Component {
           {size => (
             <Box fill>
               <AppBar>
-                <Heading level='3' margin='none'>
-                  Hello
-                </Heading>
-                <Button
-                  icon={
-                    <Notification
-                      onClick={() =>
-                        this.setState(prevState => ({
-                          showSidebar: !prevState.showSidebar
-                        }))
-                      }
-                    />
-                  }
+                <AppBarContent
+                  showSidebar={showSidebar}
+                  toggleSidebar={this.toggleSidebar}
                 />
               </AppBar>
               <Box direction='row' flex overflow={{ horizontal: 'hidden' }}>
-                <Box flex align='center' justify='center'>
-                  app body
-                </Box>
+                <AppBody />
                 {!showSidebar || size !== 'small' ? (
-                  <Collapsible direction='horizontal' open={showSidebar}>
-                    <Box
-                      flex
-                      width='medium'
-                      background='light-2'
-                      elevation='small'
-                      align='center'
-                      justify='center'
-                    >
-                      sidebar
-                    </Box>
-                  </Collapsible>
+                  <CollapsibleSidebar showSidebar={showSidebar} />
                 ) : (
-                  <Layer>
-                    <Box
-                      background='light-2'
-                      tag='header'
-                      justify='end'
-                      align='center'
-                      direction='row'
-                    >
-                      <Button
-                        icon={<FormClose />}
-                        onClick={() => this.setState({ showSidebar: false })}
-                      />
-                    </Box>
-                    <Box
-                      fill
-                      background='light-2'
-                      align='center'
-                      justify='center'
-                    >
-                      sidebar
-                    </Box>
-                  </Layer>
+                  <LayeredSidebar hideSidebar={this.hideSidebar} />
                 )}
               </Box>
             </Box>
@@ -112,6 +38,15 @@ class App extends Component {
       </Grommet>
     );
   }
+
+  toggleSidebar = () => {
+    this.setState(currentState => {
+      return { showSidebar: !currentState.showSidebar };
+    });
+  };
+  hideSidebar = () => {
+    this.setState({ showSidebar: false });
+  };
 }
 
 export default App;

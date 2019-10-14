@@ -2,16 +2,16 @@ import React from 'react';
 import { Button, Heading } from 'grommet';
 import { Close, Menu } from 'grommet-icons';
 
-const AppBarContent = props => {
-  const { showSidebar, toggleSidebar } = props;
+const TitleBarContent = props => {
+  const { showMenuBar, toggleMenuBar } = props;
   return (
     <>
       <Button
         icon={
-          !showSidebar ? (
-            <Menu onClick={toggleSidebar} />
+          !showMenuBar ? (
+            <Menu onClick={toggleMenuBar} />
           ) : (
-            <Close onClick={toggleSidebar} />
+            <Close onClick={toggleMenuBar} />
           )
         }
       />
@@ -22,4 +22,4 @@ const AppBarContent = props => {
   );
 };
 
-export default AppBarContent;
+export default TitleBarContent;

@@ -1,35 +1,34 @@
 import React, { Component } from 'react';
 import { Box, Grommet, ResponsiveContext } from 'grommet';
 import { theme } from './styles/theme';
-import AppBar from './components/appBar/AppBar';
-import AppBarContent from './components/appBar/AppBarContent';
+import TitleBar from './components/titleBar/TitleBar';
+import TitleBarContent from './components/titleBar/TitleBarContent';
 import AppBody from './components/AppBody';
-import CollapsibleSidebar from './components/sidebar/CollapsibleSidebar';
-import LayeredSidebar from './components/sidebar/LayeredSidebar';
-// TEST!!!
+import CollapsibleMenuBar from './components/menuBar/CollapsibleMenuBar';
+import LayeredMenuBar from './components/menuBar/LayeredMenuBar';
 
 class App extends Component {
   state = {
-    showSidebar: false
+    showMenuBar: false
   };
   render() {
-    const { showSidebar } = this.state;
+    const { showMenuBar } = this.state;
     return (
       <Grommet theme={theme} full>
         <ResponsiveContext.Consumer>
           {size => (
             <Box fill>
-              <AppBar>
-                <AppBarContent
-                  showSidebar={showSidebar}
-                  toggleSidebar={this.toggleSidebar}
+              <TitleBar>
+                <TitleBarContent
+                  showMenuBar={showMenuBar}
+                  toggleMenuBar={this.toggleMenuBar}
                 />
-              </AppBar>
-              <Box direction='row' flex overflow={{ horizontal: 'hidden' }}>
-                {!showSidebar || size !== 'small' ? (
-                  <CollapsibleSidebar showSidebar={showSidebar} />
+              </TitleBar>
+              <Box direction='column' flex overflow={{ vertical: 'hidden' }}>
+                {!showMenuBar || size !== 'small' ? (
+                  <CollapsibleMenuBar showMenuBar={showMenuBar} />
                 ) : (
-                  <LayeredSidebar hideSidebar={this.hideSidebar} />
+                  <LayeredMenuBar hideMenuBar={this.hideMenuBar} />
                 )}
                 <AppBody />
               </Box>
@@ -40,13 +39,13 @@ class App extends Component {
     );
   }
 
-  toggleSidebar = () => {
+  toggleMenuBar = () => {
     this.setState(currentState => {
-      return { showSidebar: !currentState.showSidebar };
+      return { showMenuBar: !currentState.showMenuBar };
     });
   };
-  hideSidebar = () => {
-    this.setState({ showSidebar: false });
+  hideMenuBar = () => {
+    this.setState({ showMenuBar: false });
   };
 }
 

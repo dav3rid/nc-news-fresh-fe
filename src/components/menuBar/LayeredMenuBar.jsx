@@ -1,10 +1,10 @@
 import React from 'react';
 import { Box, Button, Layer } from 'grommet';
 import { FormClose } from 'grommet-icons';
-import SidebarContent from './SidebarContent';
+import MenuBarContent from './MenuBarContent';
 
-const LayeredSidebar = props => {
-  const { hideSidebar } = props;
+const LayeredMenuBar = props => {
+  const { hideMenuBar } = props;
   return (
     <Layer>
       <Box
@@ -14,13 +14,13 @@ const LayeredSidebar = props => {
         align='center'
         direction='row'
       >
-        <Button icon={<FormClose />} onClick={hideSidebar} />
+        <Button icon={<FormClose />} onClick={hideMenuBar} />
       </Box>
       <Box fill background='light-2' align='center' justify='center'>
-        <SidebarContent />
+        <MenuBarContent />
       </Box>
     </Layer>
   );
 };
 
-export default LayeredSidebar;
+export default LayeredMenuBar;

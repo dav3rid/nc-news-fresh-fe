@@ -1,7 +1,7 @@
 import React from 'react';
 import { Box } from 'grommet';
 
-const AppBar = props => (
+const TitleBar = props => (
   <Box
     tag='header'
     direction='row'
@@ -15,4 +15,4 @@ const AppBar = props => (
   />
 );
 
-export default AppBar;
+export default TitleBar;

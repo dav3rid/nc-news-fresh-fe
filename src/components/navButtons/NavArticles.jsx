@@ -5,7 +5,7 @@ import { Button } from 'grommet';
 const NavArticles = () => {
   return (
     <Link to='/articles'>
-      <Button label='test' />
+      <Button label='test' display='inline' />
     </Link>
   );
 };

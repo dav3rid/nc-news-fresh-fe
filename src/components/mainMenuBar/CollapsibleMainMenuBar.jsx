@@ -8,10 +8,12 @@ const CollapsibleMainMenuBar = props => {
     <Collapsible direction='vertical' open={showMainMenuBar}>
       <Box
         flex
+        direction='row'
         background='dark-2'
         elevation='small'
         align='center'
-        justify='center'
+        justify='around'
+        pad='small'
       >
         <MainMenuBarContent />
       </Box>

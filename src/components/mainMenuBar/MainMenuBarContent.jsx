@@ -2,7 +2,12 @@ import React from 'react';
 import NavArticles from '../../components/navButtons/NavArticles';
 
 const MainMenuBarContent = () => {
-  return <NavArticles />;
+  return (
+    <>
+      <NavArticles />
+      <NavArticles />
+    </>
+  );
 };
 
 export default MainMenuBarContent;

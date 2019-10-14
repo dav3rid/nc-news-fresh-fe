@@ -42,7 +42,9 @@ class App extends Component {
                 )}
                 <Box direction='row' flex overflow={{ horizontal: 'hidden' }}>
                   <CollapsibleSideBar showSideBar={showSideBar} />
-                  <AppBody />
+                  <AppBody
+                    changeCurrentPageTitle={this.changeCurrentPageTitle}
+                  />
                 </Box>
               </Box>
               <Footer>

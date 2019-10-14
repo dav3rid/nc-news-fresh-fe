@@ -1,19 +1,21 @@
 import React from 'react';
 import { Box, Collapsible } from 'grommet';
-import MainMenuBarContent from './MainMenuBarContent';
+// import MainMenuBarContent from './MainMenuBarContent';
 
 const CollapsibleMainMenuBar = props => {
-  const { showMainMenuBar } = props;
+  const { showSideBar } = props;
   return (
-    <Collapsible direction='vertical' open={showMainMenuBar}>
+    <Collapsible direction='horizontal' open={showSideBar}>
       <Box
         flex
-        background='dark-2'
+        width='medium'
+        background='dark-1'
         elevation='small'
         align='center'
         justify='center'
       >
-        <MainMenuBarContent />
+        {/* <MainMenuBarContent /> */}
+        hello
       </Box>
     </Collapsible>
   );

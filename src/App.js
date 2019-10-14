@@ -6,13 +6,15 @@ import TitleBarContent from './components/titleBar/TitleBarContent';
 import AppBody from './components/AppBody';
 import CollapsibleMainMenuBar from './components/mainMenuBar/CollapsibleMainMenuBar';
 import LayeredMainMenuBar from './components/mainMenuBar/LayeredMainMenuBar';
+import CollapsibleSideBar from './components/sideBar/CollapsibleSideBar';
 
 class App extends Component {
   state = {
-    showMenuBar: false
+    showMainMenuBar: false,
+    showSideBar: false
   };
   render() {
-    const { showMenuBar } = this.state;
+    const { showMainMenuBar, showSideBar } = this.state;
     return (
       <Grommet theme={theme} full>
         <ResponsiveContext.Consumer>
@@ -20,17 +22,24 @@ class App extends Component {
             <Box fill>
               <TitleBar>
                 <TitleBarContent
-                  showMenuBar={showMenuBar}
-                  toggleMenuBar={this.toggleMenuBar}
+                  showMainMenuBar={showMainMenuBar}
+                  toggleMainMenuBar={this.toggleMainMenuBar}
+                  showSideBar={showSideBar}
+                  toggleSideBar={this.toggleSideBar}
                 />
               </TitleBar>
               <Box direction='column' flex overflow={{ vertical: 'hidden' }}>
-                {!showMenuBar || size !== 'small' ? (
-                  <CollapsibleMainMenuBar showMenuBar={showMenuBar} />
+                {!showMainMenuBar || size !== 'small' ? (
+                  <>
+                    <CollapsibleMainMenuBar showMainMenuBar={showMainMenuBar} />
+                  </>
                 ) : (
-                  <LayeredMainMenuBar hideMenuBar={this.hideMenuBar} />
+                  <LayeredMainMenuBar hideMainMenuBar={this.hideMainMenuBar} />
                 )}
-                <AppBody />
+                <Box direction='row' flex overflow={{ horizontal: 'hidden' }}>
+                  <CollapsibleSideBar showSideBar={showSideBar} />
+                  <AppBody />
+                </Box>
               </Box>
             </Box>
           )}
@@ -39,13 +48,24 @@ class App extends Component {
     );
   }
 
-  toggleMenuBar = () => {
+  // TOGGLING VISIBILITY FOR MAIN MENU BAR
+  toggleMainMenuBar = () => {
     this.setState(currentState => {
-      return { showMenuBar: !currentState.showMenuBar };
+      return { showMainMenuBar: !currentState.showMainMenuBar };
     });
   };
-  hideMenuBar = () => {
-    this.setState({ showMenuBar: false });
+  hideMainMenuBar = () => {
+    this.setState({ showMainMenuBar: false });
+  };
+
+  // TOGGLING VISIBILITY FOR SIDE BAR
+  toggleSideBar = () => {
+    this.setState(currentState => {
+      return { showSideBar: !currentState.showSideBar };
+    });
+  };
+  hideSideBar = () => {
+    this.setState({ showSideBar: false });
   };
 }
 

@@ -3,15 +3,29 @@ import { Button, Heading } from 'grommet';
 import { Close, Menu } from 'grommet-icons';
 
 const TitleBarContent = props => {
-  const { showMenuBar, toggleMenuBar } = props;
+  const {
+    showMainMenuBar,
+    toggleMainMenuBar,
+    showSideBar,
+    toggleSideBar
+  } = props;
   return (
     <>
       <Button
         icon={
-          !showMenuBar ? (
-            <Menu onClick={toggleMenuBar} />
+          !showSideBar ? (
+            <Menu onClick={toggleSideBar} />
           ) : (
-            <Close onClick={toggleMenuBar} />
+            <Close onClick={toggleSideBar} />
+          )
+        }
+      />
+      <Button
+        icon={
+          !showMainMenuBar ? (
+            <Menu onClick={toggleMainMenuBar} />
+          ) : (
+            <Close onClick={toggleMainMenuBar} />
           )
         }
       />

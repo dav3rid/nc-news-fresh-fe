@@ -1,7 +1,8 @@
 import React from 'react';
+import NavArticles from '../../components/navButtons/NavArticles';
 
 const MainMenuBarContent = () => {
-  return <h3>Menu Bar!!</h3>;
+  return <NavArticles />;
 };
 
 export default MainMenuBarContent;

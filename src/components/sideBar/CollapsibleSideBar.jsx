@@ -10,7 +10,7 @@ const CollapsibleMainMenuBar = props => {
         flex
         width='medium'
         background='dark-1'
-        elevation='small'
+        elevation='medium'
         align='center'
         justify='center'
       >

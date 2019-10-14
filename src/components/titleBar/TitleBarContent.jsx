@@ -7,30 +7,23 @@ const TitleBarContent = props => {
     showMainMenuBar,
     toggleMainMenuBar,
     showSideBar,
-    toggleSideBar
+    toggleSideBar,
+    currentPageTitle
   } = props;
   return (
     <>
       <Button
-        icon={
-          !showSideBar ? (
-            <Menu onClick={toggleSideBar} />
-          ) : (
-            <Close onClick={toggleSideBar} />
-          )
-        }
+        icon={!showSideBar ? <Menu /> : <Close />}
+        label={!showSideBar ? 'More' : 'Less'}
+        onClick={toggleSideBar}
       />
       <Button
-        icon={
-          !showMainMenuBar ? (
-            <Menu onClick={toggleMainMenuBar} />
-          ) : (
-            <Close onClick={toggleMainMenuBar} />
-          )
-        }
+        icon={!showMainMenuBar ? <Menu /> : <Close />}
+        label={!showMainMenuBar ? 'Where To?' : 'Less'}
+        onClick={toggleMainMenuBar}
       />
       <Heading level='3' margin='none'>
-        NC News
+        {currentPageTitle}
       </Heading>
     </>
   );

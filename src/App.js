@@ -3,6 +3,8 @@ import { Box, Grommet, ResponsiveContext } from 'grommet';
 import { theme } from './styles/theme';
 import TitleBar from './components/titleBar/TitleBar';
 import TitleBarContent from './components/titleBar/TitleBarContent';
+import Footer from './components/footer/Footer';
+import FooterContent from './components/footer/FooterContent';
 import AppBody from './components/AppBody';
 import CollapsibleMainMenuBar from './components/mainMenuBar/CollapsibleMainMenuBar';
 import LayeredMainMenuBar from './components/mainMenuBar/LayeredMainMenuBar';
@@ -11,10 +13,11 @@ import CollapsibleSideBar from './components/sideBar/CollapsibleSideBar';
 class App extends Component {
   state = {
     showMainMenuBar: false,
-    showSideBar: false
+    showSideBar: false,
+    currentPageTitle: 'Welcome!'
   };
   render() {
-    const { showMainMenuBar, showSideBar } = this.state;
+    const { showMainMenuBar, showSideBar, currentPageTitle } = this.state;
     return (
       <Grommet theme={theme} full>
         <ResponsiveContext.Consumer>
@@ -26,6 +29,7 @@ class App extends Component {
                   toggleMainMenuBar={this.toggleMainMenuBar}
                   showSideBar={showSideBar}
                   toggleSideBar={this.toggleSideBar}
+                  currentPageTitle={currentPageTitle}
                 />
               </TitleBar>
               <Box direction='column' flex overflow={{ vertical: 'hidden' }}>
@@ -41,6 +45,9 @@ class App extends Component {
                   <AppBody />
                 </Box>
               </Box>
+              <Footer>
+                <FooterContent />
+              </Footer>
             </Box>
           )}
         </ResponsiveContext.Consumer>
@@ -66,6 +73,11 @@ class App extends Component {
   };
   hideSideBar = () => {
     this.setState({ showSideBar: false });
+  };
+
+  // CHANGE PAGE TITLE
+  changeCurrentPageTitle = currentPageTitle => {
+    this.setState({ currentPageTitle });
   };
 }
 

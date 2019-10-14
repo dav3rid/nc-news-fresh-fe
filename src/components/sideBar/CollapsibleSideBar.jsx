@@ -1,9 +1,9 @@
 import React from 'react';
 import { Box, Collapsible } from 'grommet';
-// import MainMenuBarContent from './MainMenuBarContent';
+import CurrentSideBarContent from './CurrentSideBarContent';
 
-const CollapsibleMainMenuBar = props => {
-  const { showSideBar } = props;
+const CollapsibleSideBar = props => {
+  const { showSideBar, currentPageTitle } = props;
   return (
     <Collapsible direction='horizontal' open={showSideBar}>
       <Box
@@ -14,11 +14,10 @@ const CollapsibleMainMenuBar = props => {
         align='center'
         justify='center'
       >
-        {/* <MainMenuBarContent /> */}
-        hello
+        <CurrentSideBarContent currentPageTitle={currentPageTitle} />
       </Box>
     </Collapsible>
   );
 };
 
-export default CollapsibleMainMenuBar;
+export default CollapsibleSideBar;

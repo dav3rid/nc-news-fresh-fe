@@ -14,10 +14,16 @@ class App extends Component {
   state = {
     showMainMenuBar: false,
     showSideBar: false,
-    currentPageTitle: 'Welcome!'
+    currentPageTitle: 'Welcome!',
+    currentUser: 'Guest'
   };
   render() {
-    const { showMainMenuBar, showSideBar, currentPageTitle } = this.state;
+    const {
+      showMainMenuBar,
+      showSideBar,
+      currentPageTitle,
+      currentUser
+    } = this.state;
     return (
       <Grommet theme={theme} full>
         <ResponsiveContext.Consumer>
@@ -41,14 +47,17 @@ class App extends Component {
                   <LayeredMainMenuBar hideMainMenuBar={this.hideMainMenuBar} />
                 )}
                 <Box direction='row' flex overflow={{ horizontal: 'hidden' }}>
-                  <CollapsibleSideBar showSideBar={showSideBar} />
+                  <CollapsibleSideBar
+                    showSideBar={showSideBar}
+                    currentPageTitle={currentPageTitle}
+                  />
                   <AppBody
                     changeCurrentPageTitle={this.changeCurrentPageTitle}
                   />
                 </Box>
               </Box>
               <Footer>
-                <FooterContent />
+                <FooterContent currentUser={currentUser} />
               </Footer>
             </Box>
           )}

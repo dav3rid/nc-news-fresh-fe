@@ -4,8 +4,8 @@ import { Button } from 'grommet';
 
 const NavArticles = () => {
   return (
-    <Link to='/articles'>
-      <Button label='Articles' />
+    <Link to='/'>
+      <Button label='Home' />
     </Link>
   );
 };

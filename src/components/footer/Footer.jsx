@@ -6,7 +6,7 @@ const Footer = props => (
     tag='footer'
     direction='row'
     align='center'
-    justify='around'
+    justify='between'
     background='dark-2'
     pad={{ left: 'medium', right: 'small', vertical: 'small' }}
     elevation='medium'

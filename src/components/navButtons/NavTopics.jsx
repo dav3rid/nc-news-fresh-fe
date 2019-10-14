@@ -2,12 +2,12 @@ import React from 'react';
 import { Link } from '@reach/router';
 import { Button } from 'grommet';
 
-const NavArticles = () => {
+const NavTopics = () => {
   return (
-    <Link to='/articles'>
-      <Button label='Articles' />
+    <Link to='/topics'>
+      <Button label='Topics' />
     </Link>
   );
 };
 
-export default NavArticles;
+export default NavTopics;

@@ -4,8 +4,8 @@ import { theme } from './styles/theme';
 import TitleBar from './components/titleBar/TitleBar';
 import TitleBarContent from './components/titleBar/TitleBarContent';
 import AppBody from './components/AppBody';
-import CollapsibleMenuBar from './components/menuBar/CollapsibleMenuBar';
-import LayeredMenuBar from './components/menuBar/LayeredMenuBar';
+import CollapsibleMainMenuBar from './components/mainMenuBar/CollapsibleMainMenuBar';
+import LayeredMainMenuBar from './components/mainMenuBar/LayeredMainMenuBar';
 
 class App extends Component {
   state = {
@@ -26,9 +26,9 @@ class App extends Component {
               </TitleBar>
               <Box direction='column' flex overflow={{ vertical: 'hidden' }}>
                 {!showMenuBar || size !== 'small' ? (
-                  <CollapsibleMenuBar showMenuBar={showMenuBar} />
+                  <CollapsibleMainMenuBar showMenuBar={showMenuBar} />
                 ) : (
-                  <LayeredMenuBar hideMenuBar={this.hideMenuBar} />
+                  <LayeredMainMenuBar hideMenuBar={this.hideMenuBar} />
                 )}
                 <AppBody />
               </Box>

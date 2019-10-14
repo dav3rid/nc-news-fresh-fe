@@ -1,8 +1,8 @@
 import React from 'react';
 import { Box, Collapsible } from 'grommet';
-import MenuBarContent from './MenuBarContent';
+import MainMenuBarContent from './MainMenuBarContent';
 
-const CollapsibleMenuBar = props => {
+const CollapsibleMainMenuBar = props => {
   const { showMenuBar } = props;
   return (
     <Collapsible direction='vertical' open={showMenuBar}>
@@ -13,10 +13,10 @@ const CollapsibleMenuBar = props => {
         align='center'
         justify='center'
       >
-        <MenuBarContent />
+        <MainMenuBarContent />
       </Box>
     </Collapsible>
   );
 };
 
-export default CollapsibleMenuBar;
+export default CollapsibleMainMenuBar;

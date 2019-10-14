@@ -1,9 +1,9 @@
 import React from 'react';
 import { Box, Button, Layer } from 'grommet';
 import { FormClose } from 'grommet-icons';
-import MenuBarContent from './MenuBarContent';
+import MainMenuBarContent from './MainMenuBarContent';
 
-const LayeredMenuBar = props => {
+const LayeredMainMenuBar = props => {
   const { hideMenuBar } = props;
   return (
     <Layer>
@@ -17,10 +17,10 @@ const LayeredMenuBar = props => {
         <Button icon={<FormClose />} onClick={hideMenuBar} />
       </Box>
       <Box fill background='light-2' align='center' justify='center'>
-        <MenuBarContent />
+        <MainMenuBarContent />
       </Box>
     </Layer>
   );
 };
 
-export default LayeredMenuBar;
+export default LayeredMainMenuBar;

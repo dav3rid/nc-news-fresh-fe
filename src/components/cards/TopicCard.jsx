@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Box, Button } from 'grommet';
-import NavArticles from '../navButtons/NavArticles';
 import { navigate } from '@reach/router';
 import { Article } from 'grommet-icons';
 

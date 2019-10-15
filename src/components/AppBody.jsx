@@ -8,20 +8,14 @@ import UsersPage from './pages/UsersPage';
 import LoginPage from './pages/LoginPage';
 
 class AppBody extends Component {
-  state = {
-    axiosParams: {
-      articles: {
-        sort_by: undefined,
-        order: undefined,
-        author: undefined,
-        topic: undefined
-      },
-      comments: { sort_by: undefined, order: undefined }
-    }
-  };
+  state = {};
   render() {
-    const { currentPageTitle, changeCurrentPageTitle } = this.props;
-    const { axiosParams } = this.state;
+    const {
+      currentPageTitle,
+      changeCurrentPageTitle,
+      axiosParams,
+      setAxiosParams
+    } = this.props;
     return (
       <Box
         flex
@@ -38,7 +32,8 @@ class AppBody extends Component {
           <TopicsPage
             path='/topics'
             changeCurrentPageTitle={changeCurrentPageTitle}
-            setAxiosParams={this.setAxiosParams}
+            setAxiosParams={setAxiosParams}
+            axiosParams={axiosParams}
           />
           <UsersPage
             path='/users'
@@ -52,11 +47,6 @@ class AppBody extends Component {
       </Box>
     );
   }
-
-  // CHANGE PARAMS OBJECT HELD IN STATE TO BE PASSED TO ANY PAGE TO ADD TO AXIOS REQUEST
-  setAxiosParams = (endpoint, param, value) => {
-    this.setState({ axiosParams: { [endpoint]: { [param]: value } } });
-  };
 }
 
 export default AppBody;

@@ -3,7 +3,13 @@ import { Box, Collapsible } from 'grommet';
 import CurrentSideBarContent from './CurrentSideBarContent';
 
 const CollapsibleSideBar = props => {
-  const { showSideBar, currentPageTitle } = props;
+  const {
+    showSideBar,
+    currentPageTitle,
+    axiosParams,
+    setAxiosParams,
+    resetAxiosParams
+  } = props;
   return (
     <Collapsible direction='horizontal' open={showSideBar}>
       <Box
@@ -14,7 +20,12 @@ const CollapsibleSideBar = props => {
         align='center'
         justify='center'
       >
-        <CurrentSideBarContent currentPageTitle={currentPageTitle} />
+        <CurrentSideBarContent
+          currentPageTitle={currentPageTitle}
+          axiosParams={axiosParams}
+          setAxiosParams={setAxiosParams}
+          resetAxiosParams={resetAxiosParams}
+        />
       </Box>
     </Collapsible>
   );

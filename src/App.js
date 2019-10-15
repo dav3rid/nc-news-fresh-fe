@@ -15,14 +15,24 @@ class App extends Component {
     showMainMenuBar: false,
     showSideBar: false,
     currentPageTitle: 'Welcome!',
-    currentUser: 'Guest'
+    currentUser: 'Guest',
+    axiosParams: {
+      articles: {
+        sort_by: undefined,
+        order: undefined,
+        author: undefined,
+        topic: undefined
+      },
+      comments: { sort_by: undefined, order: undefined }
+    }
   };
   render() {
     const {
       showMainMenuBar,
       showSideBar,
       currentPageTitle,
-      currentUser
+      currentUser,
+      axiosParams
     } = this.state;
     return (
       <Grommet theme={theme} full>
@@ -50,10 +60,15 @@ class App extends Component {
                   <CollapsibleSideBar
                     showSideBar={showSideBar}
                     currentPageTitle={currentPageTitle}
+                    axiosParams={axiosParams}
+                    setAxiosParams={this.setAxiosParams}
+                    resetAxiosParams={this.resetAxiosParams}
                   />
                   <AppBody
                     currentPageTitle={currentPageTitle}
                     changeCurrentPageTitle={this.changeCurrentPageTitle}
+                    axiosParams={axiosParams}
+                    setAxiosParams={this.setAxiosParams}
                   />
                 </Box>
               </Box>
@@ -90,6 +105,27 @@ class App extends Component {
   // CHANGE PAGE TITLE
   changeCurrentPageTitle = currentPageTitle => {
     this.setState({ currentPageTitle });
+  };
+
+  // CHANGE PARAMS OBJECT HELD IN STATE TO BE PASSED TO ANY PAGE TO ADD TO AXIOS REQUEST
+  setAxiosParams = (endpoint, param, value) => {
+    this.setState({
+      axiosParams: { [endpoint]: { [param]: value } }
+    });
+  };
+
+  resetAxiosParams = () => {
+    this.setState({
+      axiosParams: {
+        articles: {
+          sort_by: undefined,
+          order: undefined,
+          author: undefined,
+          topic: undefined
+        },
+        comments: { sort_by: undefined, order: undefined }
+      }
+    });
   };
 }
 

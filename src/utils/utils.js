@@ -55,6 +55,8 @@ export const formatArticles = articlesArr => {
       Math.floor((Date.now() - Date.parse(created_at)) / 1000)
     );
     articleObj.postTimeDifference = postTimeDifference;
+    articleObj.body =
+      articleObj.body.slice(0, 40) + '... Open article for more';
     return articleObj;
   });
   return formattedArticles;

@@ -6,9 +6,18 @@ const request = axios.create({
 
 // ARTICLES
 
-export const getArticles = async () => {
+export const getArticles = async axiosParams => {
   const {
     data: { articles }
-  } = await request.get('/articles');
+  } = await request.get('/articles', { params: axiosParams.articles });
   return articles;
+};
+
+// TOPICS
+
+export const getTopics = async () => {
+  const {
+    data: { topics }
+  } = await request.get('/topics');
+  return topics;
 };

@@ -22,7 +22,8 @@ class ArticlesPage extends Component {
 
   componentDidMount = async () => {
     this.props.changeCurrentPageTitle('Articles');
-    const articles = await api.getArticles();
+    const { axiosParams } = this.props;
+    const articles = await api.getArticles(axiosParams);
     this.setState({ articles, isLoaded: true });
   };
 

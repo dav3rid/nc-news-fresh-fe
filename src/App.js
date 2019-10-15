@@ -52,6 +52,7 @@ class App extends Component {
                     currentPageTitle={currentPageTitle}
                   />
                   <AppBody
+                    currentPageTitle={currentPageTitle}
                     changeCurrentPageTitle={this.changeCurrentPageTitle}
                   />
                 </Box>

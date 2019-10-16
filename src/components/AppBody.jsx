@@ -3,6 +3,7 @@ import { Router } from '@reach/router';
 import { Box } from 'grommet';
 import HomePage from './pages/HomePage';
 import ArticlesPage from './pages/ArticlesPage';
+import SingleArticlePage from './pages/SingleArticlePage';
 import TopicsPage from './pages/TopicsPage';
 import UsersPage from './pages/UsersPage';
 import LoginPage from './pages/LoginPage';
@@ -13,27 +14,30 @@ class AppBody extends Component {
     const {
       currentPageTitle,
       changeCurrentPageTitle,
-      axiosParams,
+      articlesParams,
       setAxiosParams
     } = this.props;
     return (
       <Box
         flex
         align='center'
-        justify={currentPageTitle === 'Articles' ? 'start' : 'center'}
+        justify={currentPageTitle.includes('Article') ? 'start' : 'center'}
       >
         <Router>
           <HomePage path='/' changeCurrentPageTitle={changeCurrentPageTitle} />
           <ArticlesPage
             path='/articles'
             changeCurrentPageTitle={changeCurrentPageTitle}
-            axiosParams={axiosParams}
+            articlesParams={articlesParams}
+          />
+          <SingleArticlePage
+            path='articles/:article_id'
+            changeCurrentPageTitle={changeCurrentPageTitle}
           />
           <TopicsPage
             path='/topics'
             changeCurrentPageTitle={changeCurrentPageTitle}
             setAxiosParams={setAxiosParams}
-            axiosParams={axiosParams}
           />
           <UsersPage
             path='/users'

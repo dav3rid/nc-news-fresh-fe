@@ -48,16 +48,59 @@ const formatDate = inputSecs => {
 
 // ARTICLES
 
+export const formatArticle = articleObj => {
+  const { created_at } = articleObj;
+  const postTimeDifference = formatDate(
+    Math.floor((Date.now() - Date.parse(created_at)) / 1000)
+  );
+  articleObj.postTimeDifference = postTimeDifference;
+  return articleObj;
+};
+
 export const formatArticles = articlesArr => {
-  const formattedArticles = articlesArr.map(articleObj => {
-    const { created_at } = articleObj;
+  return articlesArr.map(formatArticle);
+};
+
+// COMMENTS
+
+export const formatComments = commentsArr => {
+  return commentsArr.map(commentObj => {
+    const { created_at } = commentObj;
     const postTimeDifference = formatDate(
       Math.floor((Date.now() - Date.parse(created_at)) / 1000)
     );
-    articleObj.postTimeDifference = postTimeDifference;
-    articleObj.body =
-      articleObj.body.slice(0, 40) + '... Open article for more';
-    return articleObj;
+    commentObj.postTimeDifference = postTimeDifference;
+    return commentObj;
   });
-  return formattedArticles;
 };
+
+// export const formatComment = commentObj => {
+
+// }
+
+//COMMENT, VOTE UP, VOTE DOWN TO MOVE TO FULL PAGE ARTICLE SIDEBAR
+
+{
+  /* <Button
+                  gap='small'
+                  label='comment'
+                  icon={<Announce />}
+                  onClick={() => {
+                    console.log('comment button');
+                  }}
+                />
+                <br />
+                <Button
+                  gap='small'
+                  label='Vote!'
+                  icon={<Like />}
+                  onClick={() => this.handleVote(article_id, 1)}
+                />
+                <br />
+                <Button
+                  gap='small'
+                  label='Nope'
+                  icon={<Dislike />}
+                  onClick={() => this.handleVote(article_id, -1)}
+                /> */
+}

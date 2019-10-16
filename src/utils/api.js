@@ -6,11 +6,18 @@ const request = axios.create({
 
 // ARTICLES
 
-export const getArticles = async axiosParams => {
+export const getArticles = async articlesParams => {
   const {
     data: { articles }
-  } = await request.get('/articles', { params: axiosParams.articles });
+  } = await request.get('/articles', { params: articlesParams });
   return articles;
+};
+
+export const getArticleById = async article_id => {
+  const {
+    data: { article }
+  } = await request.get(`/articles/${article_id}`);
+  return article;
 };
 
 // TOPICS
@@ -20,4 +27,13 @@ export const getTopics = async () => {
     data: { topics }
   } = await request.get('/topics');
   return topics;
+};
+
+// COMMENTS
+
+export const getComments = async article_id => {
+  const {
+    data: { comments }
+  } = await request.get(`/articles/${article_id}/comments`);
+  return comments;
 };

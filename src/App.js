@@ -16,15 +16,13 @@ class App extends Component {
     showSideBar: false,
     currentPageTitle: 'Welcome!',
     currentUser: 'Guest',
-    axiosParams: {
-      articles: {
-        sort_by: undefined,
-        order: undefined,
-        author: undefined,
-        topic: undefined
-      },
-      comments: { sort_by: undefined, order: undefined }
-    }
+    articlesParams: {
+      sort_by: undefined,
+      order: undefined,
+      author: undefined,
+      topic: undefined
+    },
+    commentsParams: { sort_by: undefined, order: undefined }
   };
   render() {
     const {
@@ -32,7 +30,8 @@ class App extends Component {
       showSideBar,
       currentPageTitle,
       currentUser,
-      axiosParams
+      articlesParams,
+      commentsParams
     } = this.state;
     return (
       <Grommet theme={theme} full>
@@ -60,14 +59,14 @@ class App extends Component {
                   <CollapsibleSideBar
                     showSideBar={showSideBar}
                     currentPageTitle={currentPageTitle}
-                    axiosParams={axiosParams}
+                    articlesParams={articlesParams}
                     setAxiosParams={this.setAxiosParams}
                     resetAxiosParams={this.resetAxiosParams}
                   />
                   <AppBody
                     currentPageTitle={currentPageTitle}
                     changeCurrentPageTitle={this.changeCurrentPageTitle}
-                    axiosParams={axiosParams}
+                    articlesParams={articlesParams}
                     setAxiosParams={this.setAxiosParams}
                   />
                 </Box>
@@ -109,21 +108,26 @@ class App extends Component {
 
   // CHANGE PARAMS OBJECT HELD IN STATE TO BE PASSED TO ANY PAGE TO ADD TO AXIOS REQUEST
   setAxiosParams = (endpoint, param, value) => {
-    this.setState({
-      axiosParams: { [endpoint]: { [param]: value } }
+    this.setState(currentState => {
+      if (endpoint === 'articles') {
+        return {
+          articlesParams: { ...currentState.articlesParams, [param]: value }
+        };
+      } else if (endpoint === 'comments') {
+        return {
+          commentsParams: { ...currentState.commentsParams, [param]: value }
+        };
+      }
     });
   };
 
   resetAxiosParams = () => {
     this.setState({
-      axiosParams: {
-        articles: {
-          sort_by: undefined,
-          order: undefined,
-          author: undefined,
-          topic: undefined
-        },
-        comments: { sort_by: undefined, order: undefined }
+      articlesParams: {
+        sort_by: undefined,
+        order: undefined,
+        author: undefined,
+        topic: undefined
       }
     });
   };

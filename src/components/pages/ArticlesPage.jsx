@@ -21,18 +21,21 @@ class ArticlesPage extends Component {
   }
 
   componentDidUpdate = async (prevProps, prevState) => {
-    const { axiosParams } = this.props;
-    if (JSON.stringify(prevProps.axiosParams) !== JSON.stringify(axiosParams)) {
+    const { articlesParams } = this.props;
+    if (
+      JSON.stringify(prevProps.articlesParams) !==
+      JSON.stringify(articlesParams)
+    ) {
       this.setState({ isLoaded: false });
-      const articles = await api.getArticles(axiosParams);
+      const articles = await api.getArticles(articlesParams);
       this.setState({ articles, isLoaded: true });
     }
   };
 
   componentDidMount = async () => {
     this.props.changeCurrentPageTitle('Articles');
-    const { axiosParams } = this.props;
-    const articles = await api.getArticles(axiosParams);
+    const { articlesParams } = this.props;
+    const articles = await api.getArticles(articlesParams);
     this.setState({ articles, isLoaded: true });
   };
 }

@@ -1,26 +1,22 @@
 import React, { Component } from 'react';
-import { Link } from '@reach/router';
 import { Box, Button } from 'grommet';
-import { Article, AddCircle, SubtractCircle } from 'grommet-icons';
+import { AddCircle, SubtractCircle } from 'grommet-icons';
 
-class ArticleCard extends Component {
+class CommentCard extends Component {
   state = {
     currentHover: 0,
     currentClicked: 0
   };
   render() {
     const {
-      article: {
+      comment: {
         article_id,
+        comment_id,
         author,
         body,
-        comment_count,
-        title,
-        topic,
         postTimeDifference,
         votes
-      },
-      isFullPage
+      }
     } = this.props;
     const { currentHover, currentClicked } = this.state;
     return (
@@ -30,9 +26,9 @@ class ArticleCard extends Component {
         pad='small'
         direction='row'
         border={{ color: 'darkred', size: 'medium' }}
-        background={article_id === currentHover ? 'dark-3' : 'light-4'}
+        background={comment_id === currentHover ? 'dark-3' : 'light-4'}
         width='large'
-        onMouseEnter={() => this.handleMouseEnter(article_id)}
+        onMouseEnter={() => this.handleMouseEnter(comment_id)}
         onMouseLeave={this.handleMouseLeave}
       >
         {/* AUTHOR BOX */}
@@ -44,24 +40,20 @@ class ArticleCard extends Component {
           pad='small'
           background='rgb(44, 43, 43)'
         >
-          {!isFullPage && article_id === currentHover ? (
+          {comment_id === currentHover ? (
             currentClicked !== 0 ? (
               <>
-                <Link to={`/articles/${article_id}`}>
-                  <Button label='Open Article' icon={<Article />} />
-                </Link>
-                <br />
                 <Button
                   label='Less'
                   icon={<SubtractCircle />}
-                  onClick={() => this.handleClick(article_id)}
+                  onClick={() => this.handleClick(comment_id)}
                 />
               </>
             ) : (
               <Button
                 label='More'
                 icon={<AddCircle />}
-                onClick={() => this.handleClick(article_id)}
+                onClick={() => this.handleClick(comment_id)}
               />
             )
           ) : (
@@ -70,28 +62,14 @@ class ArticleCard extends Component {
         </Box>
         <Box
           width='stretch'
-          align='center'
+          align='start'
           justify='center'
           pad='small'
           background='light-5'
         >
-          <strong>{title}</strong>
-          <br />
           <span>
-            <strong>topic</strong> {topic}
-            {'  |  '}
             <strong>votes</strong> {votes}
-            {'  |  '}
-            <strong>comments</strong> {comment_count}
-            {currentClicked !== 0 || isFullPage ? (
-              <p>
-                {isFullPage
-                  ? body
-                  : body.slice(0, 40) + '... Open article for more'}
-              </p>
-            ) : (
-              <br />
-            )}
+            {currentClicked !== 0 ? <p>{body}</p> : <br />}
             <strong>posted</strong> {postTimeDifference} ago
             {currentClicked !== 0 && (
               <p>
@@ -105,20 +83,20 @@ class ArticleCard extends Component {
   }
 
   // HANDLES HIGHLIGHTING OF CURRENTLY HOVERED ARTICLE CARD
-  handleMouseEnter = article_id => {
-    this.setState({ currentHover: article_id });
+  handleMouseEnter = comment_id => {
+    this.setState({ currentHover: comment_id });
   };
   handleMouseLeave = () => {
     this.setState({ currentHover: 0 });
   };
 
-  handleClick = article_id => {
+  handleClick = comment_id => {
     this.setState(currentState => {
-      return article_id !== currentState.currentClicked
-        ? { currentClicked: article_id }
+      return comment_id !== currentState.currentClicked
+        ? { currentClicked: comment_id }
         : { currentClicked: 0, currentHover: 0 };
     });
   };
 }
 
-export default ArticleCard;
+export default CommentCard;

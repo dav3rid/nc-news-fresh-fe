@@ -3,7 +3,7 @@ import { Box, Collapsible } from 'grommet';
 import MainMenuBarContent from './MainMenuBarContent';
 
 const CollapsibleMainMenuBar = props => {
-  const { showMainMenuBar } = props;
+  const { showMainMenuBar, currentUser, toggleUserLogin } = props;
   return (
     <Collapsible direction='vertical' open={showMainMenuBar}>
       <Box
@@ -15,7 +15,10 @@ const CollapsibleMainMenuBar = props => {
         justify='around'
         pad='small'
       >
-        <MainMenuBarContent />
+        <MainMenuBarContent
+          currentUser={currentUser}
+          toggleUserLogin={toggleUserLogin}
+        />
       </Box>
     </Collapsible>
   );

@@ -37,3 +37,14 @@ export const getComments = async article_id => {
   } = await request.get(`/articles/${article_id}/comments`);
   return comments;
 };
+
+// USERS
+
+export const getUsers = async () => {
+  const {
+    data: { users }
+  } = await request.get('/users');
+  return users;
+};
+
+getUsers();

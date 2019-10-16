@@ -4,7 +4,7 @@ import { FormClose } from 'grommet-icons';
 import MainMenuBarContent from './MainMenuBarContent';
 
 const LayeredMainMenuBar = props => {
-  const { hideMainMenuBar } = props;
+  const { hideMainMenuBar, currentUser, toggleUserLogin } = props;
   return (
     <Layer>
       <Box
@@ -17,7 +17,10 @@ const LayeredMainMenuBar = props => {
         <Button icon={<FormClose />} onClick={hideMainMenuBar} />
       </Box>
       <Box fill background='light-2' align='center' justify='center'>
-        <MainMenuBarContent />
+        <MainMenuBarContent
+          currentUser={currentUser}
+          toggleUserLogin={toggleUserLogin}
+        />
       </Box>
     </Layer>
   );

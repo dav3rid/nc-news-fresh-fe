@@ -50,10 +50,18 @@ class App extends Component {
               <Box direction='column' flex overflow={{ vertical: 'hidden' }}>
                 {!showMainMenuBar || size !== 'small' ? (
                   <>
-                    <CollapsibleMainMenuBar showMainMenuBar={showMainMenuBar} />
+                    <CollapsibleMainMenuBar
+                      showMainMenuBar={showMainMenuBar}
+                      currentUser={currentUser}
+                      toggleUserLogin={this.toggleUserLogin}
+                    />
                   </>
                 ) : (
-                  <LayeredMainMenuBar hideMainMenuBar={this.hideMainMenuBar} />
+                  <LayeredMainMenuBar
+                    hideMainMenuBar={this.hideMainMenuBar}
+                    currentUser={currentUser}
+                    toggleUserLogin={this.toggleUserLogin}
+                  />
                 )}
                 <Box direction='row' flex overflow={{ horizontal: 'hidden' }}>
                   <CollapsibleSideBar
@@ -68,6 +76,8 @@ class App extends Component {
                     changeCurrentPageTitle={this.changeCurrentPageTitle}
                     articlesParams={articlesParams}
                     setAxiosParams={this.setAxiosParams}
+                    toggleUserLogin={this.toggleUserLogin}
+                    currentUser={currentUser}
                   />
                 </Box>
               </Box>
@@ -130,6 +140,15 @@ class App extends Component {
         topic: undefined
       }
     });
+  };
+
+  // LOG IN/ OUT USERS
+  toggleUserLogin = username => {
+    if (username) {
+      this.setState({ currentUser: username });
+    } else {
+      this.setState({ currentUser: 'Guest' });
+    }
   };
 }
 

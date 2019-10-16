@@ -15,16 +15,26 @@ class AppBody extends Component {
       currentPageTitle,
       changeCurrentPageTitle,
       articlesParams,
-      setAxiosParams
+      setAxiosParams,
+      currentUser,
+      toggleUserLogin
     } = this.props;
     return (
       <Box
         flex
         align='center'
-        justify={currentPageTitle.includes('Article') ? 'start' : 'center'}
+        justify={
+          currentPageTitle.includes('Article') || currentPageTitle === 'Login'
+            ? 'start'
+            : 'center'
+        }
       >
         <Router>
-          <HomePage path='/' changeCurrentPageTitle={changeCurrentPageTitle} />
+          <HomePage
+            path='/'
+            changeCurrentPageTitle={changeCurrentPageTitle}
+            currentUser={currentUser}
+          />
           <ArticlesPage
             path='/articles'
             changeCurrentPageTitle={changeCurrentPageTitle}
@@ -46,6 +56,7 @@ class AppBody extends Component {
           <LoginPage
             path='/login'
             changeCurrentPageTitle={changeCurrentPageTitle}
+            toggleUserLogin={toggleUserLogin}
           />
         </Router>
       </Box>

@@ -5,14 +5,15 @@ import NavArticles from '../../components/navButtons/NavArticles';
 import NavUsers from '../../components/navButtons/NavUsers';
 import NavLogin from '../../components/navButtons/NavLogin';
 
-const MainMenuBarContent = () => {
+const MainMenuBarContent = props => {
+  const { currentUser, toggleUserLogin } = props;
   return (
     <>
       <NavHome />
       <NavTopics />
       <NavArticles />
       <NavUsers />
-      <NavLogin />
+      <NavLogin currentUser={currentUser} toggleUserLogin={toggleUserLogin} />
     </>
   );
 };

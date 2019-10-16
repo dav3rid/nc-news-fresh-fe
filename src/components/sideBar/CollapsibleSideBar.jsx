@@ -8,7 +8,8 @@ const CollapsibleSideBar = props => {
     currentPageTitle,
     currentUser,
     setAxiosParams,
-    resetAxiosParams
+    resetAxiosParams,
+    triggerRender
   } = props;
   return (
     <Collapsible direction='horizontal' open={showSideBar}>
@@ -25,6 +26,7 @@ const CollapsibleSideBar = props => {
           currentUser={currentUser}
           setAxiosParams={setAxiosParams}
           resetAxiosParams={resetAxiosParams}
+          triggerRender={triggerRender}
         />
       </Box>
     </Collapsible>

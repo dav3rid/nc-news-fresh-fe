@@ -38,6 +38,13 @@ export const getComments = async article_id => {
   return comments;
 };
 
+export const postComment = (username, body, article_id) => {
+  request.post(`/articles/${article_id}/comments`, {
+    username,
+    body
+  });
+};
+
 // USERS
 
 export const getUsers = async () => {
@@ -46,5 +53,3 @@ export const getUsers = async () => {
   } = await request.get('/users');
   return users;
 };
-
-getUsers();

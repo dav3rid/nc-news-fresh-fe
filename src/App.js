@@ -9,6 +9,7 @@ import AppBody from './components/AppBody';
 import CollapsibleMainMenuBar from './components/mainMenuBar/CollapsibleMainMenuBar';
 import LayeredMainMenuBar from './components/mainMenuBar/LayeredMainMenuBar';
 import CollapsibleSideBar from './components/sideBar/CollapsibleSideBar';
+// import Bridge from './components/Bridge';
 
 class App extends Component {
   state = {
@@ -30,8 +31,7 @@ class App extends Component {
       showSideBar,
       currentPageTitle,
       currentUser,
-      articlesParams,
-      commentsParams
+      articlesParams
     } = this.state;
     return (
       <Grommet theme={theme} full>
@@ -64,6 +64,7 @@ class App extends Component {
                   />
                 )}
                 <Box direction='row' flex overflow={{ horizontal: 'hidden' }}>
+                  {/* <Bridge /> */}
                   <CollapsibleSideBar
                     showSideBar={showSideBar}
                     currentPageTitle={currentPageTitle}
@@ -71,6 +72,7 @@ class App extends Component {
                     setAxiosParams={this.setAxiosParams}
                     resetAxiosParams={this.resetAxiosParams}
                     currentUser={currentUser}
+                    triggerRender={this.triggerRender}
                   />
                   <AppBody
                     currentPageTitle={currentPageTitle}
@@ -160,6 +162,12 @@ class App extends Component {
     } else {
       this.setState({ currentUser: 'Guest' });
     }
+  };
+
+  // FUNCTION TO TRIGGER RE-RENDER WITHOUT MOVING SIDEBAR AND ARTICLE PAGE STATES UP TO APP
+  triggerRender = () => {
+    console.log('hello');
+    this.forceUpdate();
   };
 }
 

@@ -73,34 +73,3 @@ export const formatComments = commentsArr => {
     return commentObj;
   });
 };
-
-// export const formatComment = commentObj => {
-
-// }
-
-//COMMENT, VOTE UP, VOTE DOWN TO MOVE TO FULL PAGE ARTICLE SIDEBAR
-
-{
-  /* <Button
-                  gap='small'
-                  label='comment'
-                  icon={<Announce />}
-                  onClick={() => {
-                    console.log('comment button');
-                  }}
-                />
-                <br />
-                <Button
-                  gap='small'
-                  label='Vote!'
-                  icon={<Like />}
-                  onClick={() => this.handleVote(article_id, 1)}
-                />
-                <br />
-                <Button
-                  gap='small'
-                  label='Nope'
-                  icon={<Dislike />}
-                  onClick={() => this.handleVote(article_id, -1)}
-                /> */
-}

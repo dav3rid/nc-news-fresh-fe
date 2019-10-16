@@ -7,7 +7,8 @@ const CurrentSideBarContent = props => {
     currentPageTitle,
     currentUser,
     setAxiosParams,
-    resetAxiosParams
+    resetAxiosParams,
+    triggerRender
   } = props;
   if (currentPageTitle === 'Articles') {
     return (
@@ -17,7 +18,12 @@ const CurrentSideBarContent = props => {
       />
     );
   } else if (currentPageTitle === 'Article') {
-    return <SingleArticleSideBar currentUser={currentUser} />;
+    return (
+      <SingleArticleSideBar
+        currentUser={currentUser}
+        triggerRender={triggerRender}
+      />
+    );
   } else {
     return <></>;
   }

@@ -27,7 +27,7 @@ class CommentCard extends Component {
         direction='row'
         border={{ color: 'darkred', size: 'medium' }}
         background={comment_id === currentHover ? 'dark-3' : 'light-4'}
-        width='large'
+        width={{ max: 'large' }}
         onMouseEnter={() => this.handleMouseEnter(comment_id)}
         onMouseLeave={this.handleMouseLeave}
       >

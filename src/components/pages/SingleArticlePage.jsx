@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Heading } from 'grommet';
+import { Box, Heading } from 'grommet';
 import ArticleCard from '../cards/ArticleCard';
 import CommentsList from '../lists/CommentsList';
 import * as api from '../../utils/api';

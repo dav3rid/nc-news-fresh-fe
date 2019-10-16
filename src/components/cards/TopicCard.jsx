@@ -21,7 +21,7 @@ class TopicCard extends Component {
         direction='row'
         border={{ color: 'darkred', size: 'medium' }}
         background={slug === currentHover ? 'dark-3' : 'light-4'}
-        width='large'
+        width={{ max: 'large' }}
         onMouseEnter={() => this.handleMouseEnter(slug)}
         onMouseLeave={this.handleMouseLeave}
       >

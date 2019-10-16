@@ -1,16 +1,26 @@
 import React from 'react';
 import ArticlesSideBar from './ArticlesSideBar';
+import SingleArticleSideBar from './SingleArticleSideBar';
 
 const CurrentSideBarContent = props => {
-  const { currentPageTitle, setAxiosParams, resetAxiosParams } = props;
-  return currentPageTitle === 'Articles' ? (
-    <ArticlesSideBar
-      setAxiosParams={setAxiosParams}
-      resetAxiosParams={resetAxiosParams}
-    />
-  ) : (
-    <h2>Options relating to {currentPageTitle}</h2>
-  );
+  const {
+    currentPageTitle,
+    currentUser,
+    setAxiosParams,
+    resetAxiosParams
+  } = props;
+  if (currentPageTitle === 'Articles') {
+    return (
+      <ArticlesSideBar
+        setAxiosParams={setAxiosParams}
+        resetAxiosParams={resetAxiosParams}
+      />
+    );
+  } else if (currentPageTitle === 'Article') {
+    return <SingleArticleSideBar currentUser={currentUser} />;
+  } else {
+    return <></>;
+  }
 };
 
 export default CurrentSideBarContent;

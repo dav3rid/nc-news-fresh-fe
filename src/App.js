@@ -70,6 +70,7 @@ class App extends Component {
                     articlesParams={articlesParams}
                     setAxiosParams={this.setAxiosParams}
                     resetAxiosParams={this.resetAxiosParams}
+                    currentUser={currentUser}
                   />
                   <AppBody
                     currentPageTitle={currentPageTitle}
@@ -90,6 +91,16 @@ class App extends Component {
       </Grommet>
     );
   }
+
+  // LOCK SIDEBAR FROM VIEW WHEN ON INAPPLICABLE PAGES
+  componentDidUpdate = (prevProps, prevState) => {
+    if (
+      !this.state.currentPageTitle.includes('Article') &&
+      prevState.currentPageTitle.includes('Article')
+    ) {
+      this.hideSideBar();
+    }
+  };
 
   // TOGGLING VISIBILITY FOR MAIN MENU BAR
   toggleMainMenuBar = () => {

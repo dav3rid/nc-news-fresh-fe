@@ -6,6 +6,7 @@ const CollapsibleSideBar = props => {
   const {
     showSideBar,
     currentPageTitle,
+    currentUser,
     setAxiosParams,
     resetAxiosParams
   } = props;
@@ -21,6 +22,7 @@ const CollapsibleSideBar = props => {
       >
         <CurrentSideBarContent
           currentPageTitle={currentPageTitle}
+          currentUser={currentUser}
           setAxiosParams={setAxiosParams}
           resetAxiosParams={resetAxiosParams}
         />

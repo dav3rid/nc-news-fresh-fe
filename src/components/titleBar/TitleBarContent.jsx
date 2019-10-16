@@ -12,14 +12,25 @@ const TitleBarContent = props => {
   } = props;
   return (
     <>
-      <Button
-        icon={!showSideBar ? <Menu /> : <Close />}
-        label={!showSideBar ? 'More' : 'Less'}
-        onClick={toggleSideBar}
-      />
+      {currentPageTitle.includes('Article') ? (
+        <Button
+          icon={!showSideBar ? <Menu /> : <Close />}
+          label={
+            !showSideBar
+              ? currentPageTitle === 'Articles'
+                ? 'Filters'
+                : 'Social'
+              : 'Close'
+          }
+          onClick={toggleSideBar}
+        />
+      ) : (
+        <p></p>
+      )}
+
       <Button
         icon={!showMainMenuBar ? <Menu /> : <Close />}
-        label={!showMainMenuBar ? 'Where To?' : 'Less'}
+        label={!showMainMenuBar ? 'Pages' : 'Close'}
         onClick={toggleMainMenuBar}
       />
       <Heading level='3' margin='none'>

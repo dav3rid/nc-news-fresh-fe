@@ -31,7 +31,7 @@ class ArticleCard extends Component {
         direction='row'
         border={{ color: 'darkred', size: 'medium' }}
         background={article_id === currentHover ? 'dark-3' : 'light-4'}
-        width='large'
+        width={{ max: 'large' }}
         onMouseEnter={() => this.handleMouseEnter(article_id)}
         onMouseLeave={this.handleMouseLeave}
       >

@@ -73,7 +73,6 @@ class App extends Component {
                     />
                   ) : (
                     <>
-                      {/* {this.hideMainMenuBar()} */}
                       <LayeredSideBar
                         showSideBar={showSideBar}
                         currentPageTitle={currentPageTitle}
@@ -133,7 +132,6 @@ class App extends Component {
     });
   };
   hideSideBar = () => {
-    console.log('hello');
     this.setState({ showSideBar: false });
   };
 

@@ -131,6 +131,7 @@ class App extends Component {
       return { showSideBar: !currentState.showSideBar };
     });
   };
+
   hideSideBar = () => {
     this.setState({ showSideBar: false });
   };

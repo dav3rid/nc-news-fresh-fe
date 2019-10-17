@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { Box, Button } from 'grommet';
-import { AddCircle, SubtractCircle, Like, Dislike, Trash } from 'grommet-icons';
+import { Box } from 'grommet';
 import * as api from '../../utils/api';
+import CustomButton from '../CustomButton';
 
 class CommentCard extends Component {
   state = {
@@ -46,11 +46,10 @@ class CommentCard extends Component {
                       <>
                         {voted < 1 && (
                           <>
-                            <Button
-                              gap='small'
+                            <CustomButton
                               label='Vote!'
-                              icon={<Like />}
-                              onClick={() => this.handleVote(1)}
+                              icon='Like'
+                              func={() => this.handleVote(1)}
                             />
                             <br />
                           </>
@@ -58,11 +57,10 @@ class CommentCard extends Component {
 
                         {voted > -1 && (
                           <>
-                            <Button
-                              gap='small'
+                            <CustomButton
                               label='Nope'
-                              icon={<Dislike />}
-                              onClick={() => this.handleVote(-1)}
+                              icon='Dislike'
+                              func={() => this.handleVote(-1)}
                             />
                             <br />
                           </>
@@ -70,11 +68,10 @@ class CommentCard extends Component {
 
                         {author === currentUser && (
                           <>
-                            <Button
-                              gap='small'
+                            <CustomButton
                               label='Delete'
-                              icon={<Trash />}
-                              onClick={this.handleDeleteComment}
+                              icon='Trash'
+                              func={this.handleDeleteComment}
                             />
                             <br />
                           </>
@@ -82,17 +79,17 @@ class CommentCard extends Component {
                       </>
                     )}
 
-                    <Button
+                    <CustomButton
                       label='Less'
-                      icon={<SubtractCircle />}
-                      onClick={() => this.handleClick(comment_id)}
+                      icon='SubtractCircle'
+                      func={() => this.handleClick(comment_id)}
                     />
                   </>
                 ) : (
-                  <Button
+                  <CustomButton
                     label='More'
-                    icon={<AddCircle />}
-                    onClick={() => this.handleClick(comment_id)}
+                    icon='AddCircle'
+                    func={() => this.handleClick(comment_id)}
                   />
                 )
               ) : (

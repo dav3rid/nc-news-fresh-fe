@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from '@reach/router';
-import { Box, Button } from 'grommet';
-import { Article, AddCircle, SubtractCircle } from 'grommet-icons';
+import { Box } from 'grommet';
+import CustomButton from '../CustomButton';
 
 class ArticleCard extends Component {
   state = {
@@ -48,20 +48,20 @@ class ArticleCard extends Component {
             currentClicked !== 0 ? (
               <>
                 <Link to={`/articles/${article_id}`}>
-                  <Button label='Open Article' icon={<Article />} />
+                  <CustomButton label='Open Article' icon='Article' />
                 </Link>
                 <br />
-                <Button
+                <CustomButton
                   label='Less'
-                  icon={<SubtractCircle />}
-                  onClick={() => this.handleClick(article_id)}
+                  icon='SubtractCircle'
+                  func={() => this.handleClick(article_id)}
                 />
               </>
             ) : (
-              <Button
+              <CustomButton
                 label='More'
-                icon={<AddCircle />}
-                onClick={() => this.handleClick(article_id)}
+                icon='AddCircle'
+                func={() => this.handleClick(article_id)}
               />
             )
           ) : (

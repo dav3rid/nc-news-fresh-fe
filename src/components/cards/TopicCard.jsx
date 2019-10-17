@@ -67,14 +67,6 @@ class TopicCard extends Component {
   handleMouseLeave = () => {
     this.setState({ currentHover: '' });
   };
-
-  // handleClick = slug => {
-  //   this.setState(currentState => {
-  //     return article_id !== currentState.currentClicked
-  //       ? { currentClicked: article_id }
-  //       : { currentClicked: 0, currentHover: 0 };
-  //   });
-  // };
 }
 
 export default TopicCard;

@@ -9,12 +9,13 @@ class CommentsList extends Component {
   };
   render() {
     const { comments } = this.state;
+    const { currentUser } = this.props;
     const formattedComments = utils.formatComments(comments);
     return formattedComments.map(comment => {
       return (
         <div key={comment.comment_id}>
           <br />
-          <CommentCard comment={comment} />
+          <CommentCard comment={comment} currentUser={currentUser} />
         </div>
       );
     });

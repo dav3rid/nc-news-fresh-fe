@@ -1,24 +1,21 @@
 import React, { Component } from 'react';
 import { Box, Button } from 'grommet';
-import { AddCircle, SubtractCircle } from 'grommet-icons';
+import { AddCircle, SubtractCircle, Like, Dislike, Trash } from 'grommet-icons';
+import * as api from '../../utils/api';
 
 class CommentCard extends Component {
   state = {
     currentHover: 0,
-    currentClicked: 0
+    currentClicked: 0,
+    isDeleted: false,
+    voted: 0
   };
   render() {
     const {
-      comment: {
-        article_id,
-        comment_id,
-        author,
-        body,
-        postTimeDifference,
-        votes
-      }
+      comment: { comment_id, author, body, postTimeDifference, votes },
+      currentUser
     } = this.props;
-    const { currentHover, currentClicked } = this.state;
+    const { currentHover, currentClicked, isDeleted, voted } = this.state;
     return (
       // MAIN CARD BOX
       <Box
@@ -40,24 +37,68 @@ class CommentCard extends Component {
           pad='small'
           background='rgb(44, 43, 43)'
         >
-          {comment_id === currentHover ? (
-            currentClicked !== 0 ? (
-              <>
-                <Button
-                  label='Less'
-                  icon={<SubtractCircle />}
-                  onClick={() => this.handleClick(comment_id)}
-                />
-              </>
-            ) : (
-              <Button
-                label='More'
-                icon={<AddCircle />}
-                onClick={() => this.handleClick(comment_id)}
-              />
-            )
-          ) : (
-            author
+          {!isDeleted && (
+            <>
+              {comment_id === currentHover ? (
+                currentClicked !== 0 ? (
+                  <>
+                    {currentUser !== 'Guest' && (
+                      <>
+                        {voted < 1 && (
+                          <>
+                            <Button
+                              gap='small'
+                              label='Vote!'
+                              icon={<Like />}
+                              onClick={() => this.handleVote(1)}
+                            />
+                            <br />
+                          </>
+                        )}
+
+                        {voted > -1 && (
+                          <>
+                            <Button
+                              gap='small'
+                              label='Nope'
+                              icon={<Dislike />}
+                              onClick={() => this.handleVote(-1)}
+                            />
+                            <br />
+                          </>
+                        )}
+
+                        {author === currentUser && (
+                          <>
+                            <Button
+                              gap='small'
+                              label='Delete'
+                              icon={<Trash />}
+                              onClick={this.handleDeleteComment}
+                            />
+                            <br />
+                          </>
+                        )}
+                      </>
+                    )}
+
+                    <Button
+                      label='Less'
+                      icon={<SubtractCircle />}
+                      onClick={() => this.handleClick(comment_id)}
+                    />
+                  </>
+                ) : (
+                  <Button
+                    label='More'
+                    icon={<AddCircle />}
+                    onClick={() => this.handleClick(comment_id)}
+                  />
+                )
+              ) : (
+                author
+              )}
+            </>
           )}
         </Box>
         <Box
@@ -68,13 +109,19 @@ class CommentCard extends Component {
           background='light-5'
         >
           <span>
-            <strong>votes</strong> {votes}
-            {currentClicked !== 0 ? <p>{body}</p> : <br />}
-            <strong>posted</strong> {postTimeDifference} ago
-            {currentClicked !== 0 && (
-              <p>
-                <strong>by</strong> {author}
-              </p>
+            {!isDeleted ? (
+              <>
+                <strong>votes</strong> {votes + voted}
+                {currentClicked !== 0 ? <p>{body}</p> : <br />}
+                <strong>posted</strong> {postTimeDifference} ago
+                {currentClicked !== 0 && (
+                  <p>
+                    <strong>by</strong> {author}
+                  </p>
+                )}
+              </>
+            ) : (
+              <h2>Comment Deleted!</h2>
             )}
           </span>
         </Box>
@@ -96,6 +143,22 @@ class CommentCard extends Component {
         ? { currentClicked: comment_id }
         : { currentClicked: 0, currentHover: 0 };
     });
+  };
+
+  // HANDLE COMMENT VOTING
+  handleVote = vote => {
+    const { comment_id } = this.props.comment;
+    api.patchComment(comment_id, { inc_votes: vote });
+    this.setState(currentState => {
+      return { voted: currentState.voted + vote };
+    });
+  };
+
+  // DELETING COMMENT
+  handleDeleteComment = () => {
+    const { comment_id } = this.props.comment;
+    api.deleteComment(comment_id);
+    this.setState({ isDeleted: true });
   };
 }
 

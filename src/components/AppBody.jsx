@@ -7,6 +7,7 @@ import SingleArticlePage from './pages/SingleArticlePage';
 import TopicsPage from './pages/TopicsPage';
 import UsersPage from './pages/UsersPage';
 import LoginPage from './pages/LoginPage';
+import ErrorPage from './pages/ErrorPage';
 
 class AppBody extends Component {
   state = {};
@@ -43,6 +44,7 @@ class AppBody extends Component {
           <SingleArticlePage
             path='articles/:article_id'
             changeCurrentPageTitle={changeCurrentPageTitle}
+            currentUser={currentUser}
           />
           <TopicsPage
             path='/topics'
@@ -58,6 +60,7 @@ class AppBody extends Component {
             changeCurrentPageTitle={changeCurrentPageTitle}
             toggleUserLogin={toggleUserLogin}
           />
+          <ErrorPage default />
         </Router>
       </Box>
     );

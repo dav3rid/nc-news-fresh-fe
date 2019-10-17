@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
-import { navigate } from '@reach/router';
 import { Button, Form, FormField, TextArea } from 'grommet';
 import { Announce, Like, Dislike } from 'grommet-icons';
 import NavLogin from '../navButtons/NavLogin';
-import SingleArticlePage from '../pages/SingleArticlePage';
 import * as api from '../../utils/api';
 
 class SingleArticleSideBar extends Component {
@@ -80,11 +78,10 @@ class SingleArticleSideBar extends Component {
   handleSubmitComment = async event => {
     // INSTEAD OF MOVING CURRENT ARTICLE TO APP LEVEL STATE
     const article_id = +window.location.pathname.split('/').pop();
-    const { currentUser, triggerRender } = this.props;
+    const { currentUser } = this.props;
     const body = event.target[0].value;
     await api.postComment(currentUser, body, article_id);
     this.setState({ showCommentForm: false, commentSubmitted: true });
-    triggerRender();
   };
 }
 

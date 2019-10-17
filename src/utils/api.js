@@ -38,11 +38,22 @@ export const getComments = async article_id => {
   return comments;
 };
 
-export const postComment = (username, body, article_id) => {
-  request.post(`/articles/${article_id}/comments`, {
+export const postComment = async (username, body, article_id) => {
+  const { data } = await request.post(`/articles/${article_id}/comments`, {
     username,
     body
   });
+  return data;
+};
+
+export const deleteComment = comment_id => {
+  return request.delete(`/comments/${comment_id}`);
+};
+
+// VOTE ON COMMENT
+
+export const patchComment = (comment_id, voteObj) => {
+  request.patch(`/comments/${comment_id}`, voteObj);
 };
 
 // USERS

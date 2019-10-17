@@ -9,6 +9,7 @@ import AppBody from './components/AppBody';
 import CollapsibleMainMenuBar from './components/mainMenuBar/CollapsibleMainMenuBar';
 import LayeredMainMenuBar from './components/mainMenuBar/LayeredMainMenuBar';
 import CollapsibleSideBar from './components/sideBar/CollapsibleSideBar';
+import LayeredSideBar from './components/sideBar/LayeredSideBar';
 
 class App extends Component {
   state = {
@@ -48,13 +49,11 @@ class App extends Component {
               </TitleBar>
               <Box direction='column' flex overflow={{ vertical: 'hidden' }}>
                 {!showMainMenuBar || size !== 'small' ? (
-                  <>
-                    <CollapsibleMainMenuBar
-                      showMainMenuBar={showMainMenuBar}
-                      currentUser={currentUser}
-                      toggleUserLogin={this.toggleUserLogin}
-                    />
-                  </>
+                  <CollapsibleMainMenuBar
+                    showMainMenuBar={showMainMenuBar}
+                    currentUser={currentUser}
+                    toggleUserLogin={this.toggleUserLogin}
+                  />
                 ) : (
                   <LayeredMainMenuBar
                     hideMainMenuBar={this.hideMainMenuBar}
@@ -63,14 +62,30 @@ class App extends Component {
                   />
                 )}
                 <Box direction='row' flex overflow={{ horizontal: 'hidden' }}>
-                  <CollapsibleSideBar
-                    showSideBar={showSideBar}
-                    currentPageTitle={currentPageTitle}
-                    articlesParams={articlesParams}
-                    setAxiosParams={this.setAxiosParams}
-                    resetAxiosParams={this.resetAxiosParams}
-                    currentUser={currentUser}
-                  />
+                  {!showSideBar || size !== 'small' ? (
+                    <CollapsibleSideBar
+                      showSideBar={showSideBar}
+                      currentPageTitle={currentPageTitle}
+                      articlesParams={articlesParams}
+                      setAxiosParams={this.setAxiosParams}
+                      resetAxiosParams={this.resetAxiosParams}
+                      currentUser={currentUser}
+                    />
+                  ) : (
+                    <>
+                      {/* {this.hideMainMenuBar()} */}
+                      <LayeredSideBar
+                        showSideBar={showSideBar}
+                        currentPageTitle={currentPageTitle}
+                        articlesParams={articlesParams}
+                        setAxiosParams={this.setAxiosParams}
+                        resetAxiosParams={this.resetAxiosParams}
+                        currentUser={currentUser}
+                        hideSideBar={this.hideSideBar}
+                      />
+                    </>
+                  )}
+
                   <AppBody
                     currentPageTitle={currentPageTitle}
                     changeCurrentPageTitle={this.changeCurrentPageTitle}
@@ -118,6 +133,7 @@ class App extends Component {
     });
   };
   hideSideBar = () => {
+    console.log('hello');
     this.setState({ showSideBar: false });
   };
 

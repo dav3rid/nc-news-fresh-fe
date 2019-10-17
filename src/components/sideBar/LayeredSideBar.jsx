@@ -1,25 +1,28 @@
 import React from 'react';
-import { Box, Collapsible } from 'grommet';
+import { Box, Button, Layer } from 'grommet';
+import { FormClose } from 'grommet-icons';
 import CurrentSideBarContent from './CurrentSideBarContent';
 
-const CollapsibleSideBar = props => {
+const LayeredSideBar = props => {
   const {
-    showSideBar,
     currentPageTitle,
     currentUser,
     setAxiosParams,
-    resetAxiosParams
+    resetAxiosParams,
+    hideSideBar
   } = props;
   return (
-    <Collapsible direction='horizontal' open={showSideBar}>
+    <Layer>
       <Box
-        flex
-        width='medium'
-        background='dark-1'
-        elevation='medium'
+        background='light-2'
+        tag='header'
+        justify='end'
         align='center'
-        justify='center'
+        direction='row'
       >
+        <Button icon={<FormClose />} onClick={hideSideBar} />
+      </Box>
+      <Box fill background='light-2' align='center' justify='center'>
         <CurrentSideBarContent
           currentPageTitle={currentPageTitle}
           currentUser={currentUser}
@@ -27,8 +30,8 @@ const CollapsibleSideBar = props => {
           resetAxiosParams={resetAxiosParams}
         />
       </Box>
-    </Collapsible>
+    </Layer>
   );
 };
 
-export default CollapsibleSideBar;
+export default LayeredSideBar;

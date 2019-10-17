@@ -20,6 +20,10 @@ export const getArticleById = async article_id => {
   return article;
 };
 
+export const patchArticle = (article_id, voteObj) => {
+  request.patch(`/articles/${article_id}`, voteObj);
+};
+
 // TOPICS
 
 export const getTopics = async () => {

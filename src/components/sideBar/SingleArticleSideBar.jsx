@@ -7,11 +7,12 @@ import * as api from '../../utils/api';
 class SingleArticleSideBar extends Component {
   state = {
     showCommentForm: false,
-    commentSubmitted: false
+    commentSubmitted: false,
+    voted: 0
   };
   render() {
     const { currentUser } = this.props;
-    const { showCommentForm, commentSubmitted } = this.state;
+    const { showCommentForm, commentSubmitted, voted } = this.state;
 
     if (currentUser === 'Guest') {
       return (
@@ -50,19 +51,31 @@ class SingleArticleSideBar extends Component {
               <br />
             </>
           )}
-          <Button
-            gap='small'
-            label='Vote!'
-            icon={<Like />}
-            onClick={() => console.log('like button')}
-          />
-          <br />
-          <Button
-            gap='small'
-            label='Nope'
-            icon={<Dislike />}
-            onClick={() => console.log('dislike button')}
-          />
+          {voted < 1 && (
+            <>
+              <Button
+                gap='small'
+                label='Vote!'
+                icon={<Like />}
+                onClick={() => this.handleVote(1)}
+              />
+              <br />
+            </>
+          )}
+          {voted !== 0 && (
+            <>
+              <h2>Vote Submitted!</h2>
+              <br />
+            </>
+          )}
+          {voted > -1 && (
+            <Button
+              gap='small'
+              label='Nope'
+              icon={<Dislike />}
+              onClick={() => this.handleVote(-1)}
+            />
+          )}
         </>
       );
     }
@@ -80,8 +93,19 @@ class SingleArticleSideBar extends Component {
     const article_id = +window.location.pathname.split('/').pop();
     const { currentUser } = this.props;
     const body = event.target[0].value;
-    await api.postComment(currentUser, body, article_id);
-    this.setState({ showCommentForm: false, commentSubmitted: true });
+    if (body.length > 0) {
+      await api.postComment(currentUser, body, article_id);
+      this.setState({ showCommentForm: false, commentSubmitted: true });
+    }
+  };
+
+  // HANDLE ARTICLE VOTING
+  handleVote = vote => {
+    const article_id = +window.location.pathname.split('/').pop();
+    api.patchArticle(article_id, { inc_votes: vote });
+    this.setState(currentState => {
+      return { voted: currentState.voted + vote };
+    });
   };
 }
 

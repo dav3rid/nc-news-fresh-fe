@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
 import { Box, Grommet, ResponsiveContext } from 'grommet';
 import { theme } from './styles/theme';
-import TitleBar from './components/titleBar/TitleBar';
-import TitleBarContent from './components/titleBar/TitleBarContent';
-import Footer from './components/footer/Footer';
-import FooterContent from './components/footer/FooterContent';
+import TitleBar from './components/TitleBar';
+import Footer from './components/Footer';
 import AppBody from './components/AppBody';
 import CollapsibleMainMenuBar from './components/mainMenuBar/CollapsibleMainMenuBar';
 import LayeredMainMenuBar from './components/mainMenuBar/LayeredMainMenuBar';
@@ -36,19 +34,17 @@ class App extends Component {
     return (
       <Grommet theme={theme} full>
         <ResponsiveContext.Consumer>
-          {size => (
+          {screenSize => (
             <Box fill>
-              <TitleBar>
-                <TitleBarContent
-                  showMainMenuBar={showMainMenuBar}
-                  toggleMainMenuBar={this.toggleMainMenuBar}
-                  showSideBar={showSideBar}
-                  toggleSideBar={this.toggleSideBar}
-                  currentPageTitle={currentPageTitle}
-                />
-              </TitleBar>
+              <TitleBar
+                showMainMenuBar={showMainMenuBar}
+                toggleMainMenuBar={this.toggleMainMenuBar}
+                showSideBar={showSideBar}
+                toggleSideBar={this.toggleSideBar}
+                currentPageTitle={currentPageTitle}
+              />
               <Box direction='column' flex overflow={{ vertical: 'hidden' }}>
-                {!showMainMenuBar || size !== 'small' ? (
+                {!showMainMenuBar || screenSize !== 'small' ? (
                   <CollapsibleMainMenuBar
                     showMainMenuBar={showMainMenuBar}
                     currentUser={currentUser}
@@ -62,7 +58,7 @@ class App extends Component {
                   />
                 )}
                 <Box direction='row' flex overflow={{ horizontal: 'hidden' }}>
-                  {!showSideBar || size !== 'small' ? (
+                  {!showSideBar || screenSize !== 'small' ? (
                     <CollapsibleSideBar
                       showSideBar={showSideBar}
                       currentPageTitle={currentPageTitle}
@@ -92,12 +88,11 @@ class App extends Component {
                     setAxiosParams={this.setAxiosParams}
                     toggleUserLogin={this.toggleUserLogin}
                     currentUser={currentUser}
+                    screenSize={screenSize}
                   />
                 </Box>
               </Box>
-              <Footer>
-                <FooterContent currentUser={currentUser} />
-              </Footer>
+              <Footer currentUser={currentUser} />
             </Box>
           )}
         </ResponsiveContext.Consumer>
